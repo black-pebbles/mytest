@@ -1,0 +1,18 @@
+---
+apiVersion: helm.fluxcd.io/v1
+kind: HelmRelease
+metadata:
+  name: postgres
+  namespace: default
+  annotations:
+    fluxcd.io/automated: "true"
+    fluxcd.io/tag.chart-image: semver:~4.0
+spec:
+  releaseName: postgres
+  interval: 60s
+  chart:
+    git: ssh://git@github.com/black-pebbles/mytest
+    ref: main
+    path: charts/postgres
+  values:
+    replicaCount: 1
